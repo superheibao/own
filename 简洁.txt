@@ -1,0 +1,110 @@
+git: superheibao
+      wan0hong0song
+https://github.com/superheibao/own.git
+
+
+
+//判断浏览器名称以及版本号：浏览器不同可以执行不同的JS操作
+			window.onload=function(){
+				console.log(navigator.userAgent);
+			var browser="unknow";
+			var version="unknow";
+			if(navigator.userAgent.indexOf("MSIE")!=-1){
+				browser="IE";
+				d1.style.background="black";
+				d1.style.width="600px";
+			}else if(navigator.userAgent.indexOf("OPR")!=-1){
+				browser="Opera";
+				d1.style.background="#e4393c";
+				d1.style.width="600px";
+				
+			}else if(navigator.userAgent.indexOf("Chrome")!=-1){
+				browser="Chrome";
+				d1.style.background="pink";
+				d1.style.height="600px";
+				
+			}else if(navigator.userAgent.indexOf("Firefox")!=-1){
+				browser="Firefox";
+				d1.style.background="purple";
+			}else if(navigator.userAgent.indexOf("Safari")!=-1){
+				browser="Safari";
+				d1.style.background="yellow";
+			}else if(navigator.userAgent.indexOf("Trident")!=-1){
+				browser="IE";
+				d1.style.background="black";
+			}
+//			document.write("<h1>浏览器名称："+browser+"</h1>");
+			
+			//判断版本号：
+			if(browser!="unknown"){
+				if(browser=="Opera"){
+					var i=navigator.userAgent.indexOf("OPR");
+					i+=4;
+					version=navigator.userAgent.slice(i,i+4);
+				}else if(browser=="IE"){
+					var i=navigator.userAgent.indexOf("MSIE");
+					if(i==-1){version=11;}
+					else{
+						i+=5;
+						version=navigator.userAgent.slice(i,i+3);
+						
+					}
+				}else{
+					var i=navigator.userAgent.indexOf(browser);
+					i+=browser.length+1;
+					version=navigator.userAgent.slice(i,i+4);
+				}
+			}
+//			document.write("<h1>浏览器版本："+version+"</h1>");
+			}
+
+************************************************************************************************************************************
+
+	   兼容：if(h1.addEventListener){
+			h1.addEventListener("click",f1);
+		 }else{
+			h1.attachEvent("onclick",f1);
+		 }
+************************************************************************************************************************************
+     ***为老IE添加indexOf方法
+	if(Array.prototype.indexOf===undefined){
+		//就为所有的数组添加indexOf方法
+		Array.prototype.indexOf=function(key,fromi){
+			fromi === undefined && (fromi=0);
+			for(var i=fromi;i<this.length;i++){
+				if(this[i]==key){
+					return i;
+				}
+			}
+			return -1;
+		}
+	}
+************************************************************************************************************************************
+手写冒泡
+var arr=[1,3,42,52,0,23,42,64];
+  for(j=0;j<arr.length-j;j++){
+    for(i=0;i<arr.length-1;i++){
+    if(arr[i]>arr[i+1]){
+      var center=arr[i+1];
+      arr[i+1]=arr[i];
+      arr[i]=center;
+    }
+  }
+  }
+console.log(arr)
+************************************************************************************************************************************
+原生ajax 创建方法及固定语句
+
+ XMLHttpRequest对象：
+	function getXhr(){
+		var xhr=null;
+		if(XMLHttpRequest){//主流
+			xhr=new XMLHttpRequest();
+		}else{//
+			xhr=new ActiveXObject("Microsoft.XMLHttp");
+		}
+		return xhr;
+	}
+	var xhr=getXhr();
+在send()调用之前使用
+	xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
